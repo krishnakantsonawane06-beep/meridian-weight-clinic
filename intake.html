@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meridian Weight Clinic — Patient Intake & Care Plan</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-brand">
+      <div class="nav-logo">M</div>
+      <div>
+        <span class="display" style="font-size: 19px; font-weight: 600;">Meridian</span>
+        <span class="nav-tagline" style="display: block; font-size: 10px; margin-top: -2px;">Patient Care</span>
+      </div>
+    </div>
+    <div class="nav-right">
+      <div class="user-badge">
+        <div class="user-avatar" id="userInitial">P</div>
+        <span id="userName">Patient</span>
+      </div>
+      <a href="/logout" class="btn btn-ghost btn-sm">Sign out</a>
+    </div>
+  </nav>
+
+  <!-- Intake Form Flow -->
+  <div class="container" id="formView">
+    <div class="steps-container">
+      <div class="steps" id="steps"></div>
+    </div>
+
+    <div class="card" id="stepCard"></div>
+  </div>
+
+  <!-- Existing / Submitted Patient Care Plan Dashboard -->
+  <div class="container" id="carePlanView" style="display: none;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+          <h1 class="display" style="font-size: 28px;" id="carePlanName">Your Care Plan</h1>
+          <span id="carePlanStatusBadge" class="status-pill status-pending">Pending Review</span>
+        </div>
+        <p style="color: var(--muted); font-size: 14px;" id="carePlanSub">Submitted to Meridian clinical team.</p>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <button class="btn btn-secondary btn-sm" id="editIntakeBtn">✏️ Update Intake</button>
+        <button class="btn btn-primary btn-sm" id="printCarePlanBtn">🖨️ Print Summary</button>
+      </div>
+    </div>
+
+    <!-- Doctor's Note / Clinical Review Alert (if any) -->
+    <div id="doctorNoteCard" class="card" style="margin-bottom: 24px; border-left: 5px solid var(--primary); background: var(--surface-subtle); display: none;">
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+        <span style="font-size: 18px;">🩺</span>
+        <h3 class="display" style="font-size: 17px; margin: 0;">Care Team Clinical Remarks</h3>
+      </div>
+      <p id="doctorNoteText" style="color: var(--ink); font-size: 14px; line-height: 1.6; margin: 0;"></p>
+    </div>
+
+    <!-- Key Metrics Grid -->
+    <div class="stat-grid" style="margin-bottom: 24px;">
+      <div class="stat-card">
+        <div class="stat-header">Current BMI</div>
+        <div class="stat-val" id="portalBmi">—</div>
+        <div class="stat-sub" id="portalBmiCategory">Healthy range</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-header">Weight & Target</div>
+        <div class="stat-val" id="portalWeight">—</div>
+        <div class="stat-sub" id="portalTargetDelta">Goal: —</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-header">Activity & Lifestyle</div>
+        <div class="stat-val" id="portalActivity" style="font-size: 20px;">—</div>
+        <div class="stat-sub" id="portalDiet">—</div>
+      </div>
+    </div>
+
+    <!-- Detailed Clinical Overview -->
+    <div class="card" id="carePlanDetails">
+      <!-- Populated dynamically by intake.js -->
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="/js/intake.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  # MySQL Database Service
+  db:
+    image: mysql:8.0
+    container_name: meridian_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-meridian_root_pass_2026}
+      MYSQL_DATABASE: ${DB_NAME:-meridian_clinic}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Express.js Application Service
+  web:
+    build: .
+    container_name: meridian_web
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+      NODE_ENV: production
+      SESSION_SECRET: ${SESSION_SECRET:-meridian-production-secret-change-me}
+      ADMIN_EMAILS: ${ADMIN_EMAILS:-dr.vance@meridianclinic.com,staff@meridianclinic.com}
+      STAFF_ACCESS_KEY: ${STAFF_ACCESS_KEY:-MERIDIAN2026}
+      USE_MYSQL: "true"
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: ${DB_PASSWORD:-meridian_root_pass_2026}
+      DB_NAME: ${DB_NAME:-meridian_clinic}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      GOOGLE_CALLBACK_URL: ${GOOGLE_CALLBACK_URL:-}
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  mysql_data:
+

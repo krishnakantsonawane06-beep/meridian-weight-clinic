@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meridian Weight Clinic — Staff Clinical Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-brand">
+      <div class="nav-logo">M</div>
+      <div>
+        <span class="display" style="font-size: 19px; font-weight: 600;">Meridian</span>
+        <span class="nav-tagline" style="display: block; font-size: 10px; margin-top: -2px;">Clinical Staff Console</span>
+      </div>
+    </div>
+    <div class="nav-right">
+      <div class="user-badge">
+        <div class="user-avatar" id="userInitial">D</div>
+        <span id="userName">Dr. Vance</span>
+        <span class="status-pill status-approved" style="font-size: 10px; padding: 2px 8px;">Clinician</span>
+      </div>
+      <a href="/logout" class="btn btn-ghost btn-sm">Sign out</a>
+    </div>
+  </nav>
+
+  <div class="container-wide">
+    <!-- Header Section -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
+      <div>
+        <span class="feature-tag" style="margin-bottom: 8px;">Patient Management & Electronic Health Records</span>
+        <h1 class="display" style="font-size: 32px; margin: 0;">Clinical Intake Roster</h1>
+        <p style="color: var(--muted); margin-top: 4px;" id="countLabel">Loading patient records...</p>
+      </div>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <button class="btn btn-secondary btn-sm" id="resetSeedBtn">🔄 Restore Sample Dataset</button>
+        <button class="btn btn-primary btn-sm" id="exportBtn">⬇ Export Records (CSV / JSON)</button>
+      </div>
+    </div>
+
+    <!-- Clinical KPI Analytics Cards -->
+    <div class="stat-grid" id="statsGrid">
+      <div class="stat-card">
+        <div class="stat-header">Total Intakes</div>
+        <div class="stat-val" id="statTotal">—</div>
+        <div class="stat-sub">Active patient profiles</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-header">Needs Physician Review</div>
+        <div class="stat-val" style="color: var(--warning);" id="statPending">—</div>
+        <div class="stat-sub">Pending initial assessment</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-header">Active / Approved</div>
+        <div class="stat-val" style="color: var(--primary);" id="statApproved">—</div>
+        <div class="stat-sub">Protocols in progress</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-header">Average Clinic BMI</div>
+        <div class="stat-val mono" id="statAvgBmi">—</div>
+        <div class="stat-sub" id="statHighBmiCount">0 patients with BMI ≥ 30</div>
+      </div>
+    </div>
+
+    <!-- Search & Filter Controls -->
+    <div class="card card-sm" style="margin-bottom: 20px; background: var(--surface);">
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 260px; position: relative;">
+            <input id="search" placeholder="🔍 Search by patient name, email, or health condition..." style="padding-left: 16px;" />
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <span style="font-size: 12px; font-weight: 600; color: var(--muted); margin-right: 4px;">Status:</span>
+            <select id="statusFilter" style="width: auto; padding: 10px 14px; font-size: 13px;">
+              <option value="all">All Statuses</option>
+              <option value="pending">Pending Review</option>
+              <option value="in_review">Under Review</option>
+              <option value="approved">Approved</option>
+              <option value="consult_scheduled">Consult Scheduled</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-top: 1px solid var(--border); padding-top: 12px;">
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <span style="font-size: 12px; font-weight: 600; color: var(--muted);">Gender Cohort:</span>
+            <div class="pill-group">
+              <button class="pill active" data-gender="all">All Cohorts</button>
+              <button class="pill" data-gender="female">♀ Women</button>
+              <button class="pill" data-gender="male">♂ Men</button>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <span style="font-size: 12px; font-weight: 600; color: var(--muted);">BMI Range:</span>
+            <div class="pill-group">
+              <button class="pill active" data-bmigroup="all">All</button>
+              <button class="pill" data-bmigroup="healthy">&lt; 25</button>
+              <button class="pill" data-bmigroup="overweight">25 – 29.9</button>
+              <button class="pill" data-bmigroup="obese">30+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table Roster -->
+    <div id="tableHolder"></div>
+  </div>
+
+  <!-- Slide-out Patient Medical Chart Drawer -->
+  <div class="overlay right" id="drawerOverlay">
+    <div class="drawer" id="drawer">
+      <!-- Populated dynamically by admin.js -->
+    </div>
+  </div>
+
+  <!-- Export & Data Modal -->
+  <div class="overlay center" id="exportOverlay">
+    <div class="modal" id="exportModal">
+      <!-- Populated dynamically by admin.js -->
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>
