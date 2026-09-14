@@ -4,10 +4,10 @@ services:
   # MySQL Database Service
   db:
     image: mysql:8.0
-    container_name: meridian_mysql
+    container_name: nathshree_mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-meridian_root_pass_2026}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-Krishna@2006}
       MYSQL_DATABASE: ${DB_NAME:-meridian_clinic}
     ports:
       - "3306:3306"
@@ -37,7 +37,7 @@ services:
       DB_HOST: db
       DB_PORT: 3306
       DB_USER: root
-      DB_PASSWORD: ${DB_PASSWORD:-meridian_root_pass_2026}
+      DB_PASSWORD: ${DB_PASSWORD:-Krishna@2006}
       DB_NAME: ${DB_NAME:-meridian_clinic}
       GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
       GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
