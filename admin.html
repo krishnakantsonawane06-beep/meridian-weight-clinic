@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Meridian Weight Clinic — Staff Clinical Dashboard</title>
+  <title>Nathshree Clinic — Staff Clinical Dashboard • Wagholi</title>
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
   <nav class="nav">
     <div class="nav-brand">
-      <div class="nav-logo">M</div>
+      <div class="nav-logo">N</div>
       <div>
-        <span class="display" style="font-size: 19px; font-weight: 600;">Meridian</span>
-        <span class="nav-tagline" style="display: block; font-size: 10px; margin-top: -2px;">Clinical Staff Console</span>
+        <span class="display" style="font-size: 19px; font-weight: 600;">Nathshree</span>
+        <span class="nav-tagline" style="display: block; font-size: 10px; margin-top: -2px;">Clinic • Wagholi Console</span>
       </div>
     </div>
     <div class="nav-right">
       <div class="user-badge">
         <div class="user-avatar" id="userInitial">D</div>
-        <span id="userName">Dr. Vance</span>
+        <span id="userName">Doctor</span>
         <span class="status-pill status-approved" style="font-size: 10px; padding: 2px 8px;">Clinician</span>
       </div>
       <a href="/logout" class="btn btn-ghost btn-sm">Sign out</a>
@@ -29,12 +29,11 @@
     <!-- Header Section -->
     <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
       <div>
-        <span class="feature-tag" style="margin-bottom: 8px;">Patient Management & Electronic Health Records</span>
-        <h1 class="display" style="font-size: 32px; margin: 0;">Clinical Intake Roster</h1>
+        <span class="feature-tag" style="margin-bottom: 8px;">Nathshree Clinic • Wagholi, Pune</span>
+        <h1 class="display" style="font-size: 32px; margin: 0;">Patient EHR & Intake Roster</h1>
         <p style="color: var(--muted); margin-top: 4px;" id="countLabel">Loading patient records...</p>
       </div>
       <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-        <button class="btn btn-secondary btn-sm" id="resetSeedBtn">🔄 Restore Sample Dataset</button>
         <button class="btn btn-primary btn-sm" id="exportBtn">⬇ Export Records (CSV / JSON)</button>
       </div>
     </div>
